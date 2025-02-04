@@ -1,5 +1,5 @@
-import pygame
-
+from canvas import Canvas
 
 if __name__ == "__main__": 
-    print("hello world")
+    my_canvas = Canvas()
+    my_canvas.run()
