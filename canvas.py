@@ -10,6 +10,7 @@ class Canvas:
 
         pygame.display.set_caption("Bezier Curve")
 
+
     def handle_events(self): 
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT: 
