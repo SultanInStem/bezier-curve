@@ -12,6 +12,9 @@ class Point:
         pygame.draw.circle(screen, self.color, (screen_pos[0], screen_pos[1]),self.radius, 0)
 
     def get_pos(self): 
-        return self.pos 
+        return self.pos
+
+    def move(self, dr):
+        self.pos = self.pos + dr 
 
     
