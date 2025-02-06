@@ -17,4 +17,7 @@ class Point:
     def move(self, dr):
         self.pos = self.pos + dr 
 
+    def set_pos(self, pos): 
+        self.pos = pos 
+
     
