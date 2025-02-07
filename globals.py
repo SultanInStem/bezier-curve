@@ -12,3 +12,7 @@ def to_screen_coords(point):
     y = (SCREEN_SIZE[1] // 2) - point[1]
     return np.array([x,y])
     
+
+def lerp(): 
+    ### linear interpolation
+    pass

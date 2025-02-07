@@ -21,9 +21,6 @@ class Canvas:
             Point(np.array([100,100]), 20, (255,255,255))
         ]
 
-
-
-
     def handle_events(self): 
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT: 
