@@ -1,6 +1,6 @@
 import pygame
 import sys
-from globals import SCREEN_SIZE, to_math_coords, to_screen_coords
+from globals import SCREEN_SIZE, to_math_coords, to_screen_coords, lerp
 from point import Point
 import numpy as np 
 class Canvas: 
@@ -17,7 +17,7 @@ class Canvas:
         self.dt = 0.01
         self.points = [
             Point(np.array([-100,0]),  20, (255,255,255)), 
-            Point(np.array([0,100]), 5, (0,100,100)), 
+            Point(np.array([-220,100]), 5, (0,100,100)), 
             # Point(np.array([50,100]), 5, (0,100,100)), 
             Point(np.array([100,100]), 20, (255,255,255))
         ]
@@ -37,6 +37,7 @@ class Canvas:
                     dist = np.linalg.norm(point_pos - mouse_pos)
                     if dist < self.points[i].radius: 
                         self.dragging = True
+                        self.trace = []
                         self.dragging_index = i
 
             if event.type == pygame.MOUSEMOTION and self.dragging: 
@@ -50,10 +51,16 @@ class Canvas:
             
 
     def update(self):
-        if self.t >= 1: return
+        if self.t >= 1:
+            self.trace = []
+            self.t = 0
+            return
         self.t += self.dt 
-        pos = (self.points[2].get_pos() - self.points[1].get_pos()) - (self.points[1].get_pos() - self.points[0].get_pos())
-        pos = pos * (self.t) * (self.t)
+
+        q1 = lerp(self.points[0].get_pos(), self.points[1].get_pos(), self.t)
+        q2 = lerp(self.points[1].get_pos(), self.points[2].get_pos(), self.t)
+
+        pos = lerp(q1,q2,self.t) 
         pos = to_screen_coords(pos)
         self.trace.append((pos[0], pos[1]))
 
