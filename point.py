@@ -29,4 +29,5 @@ class Point:
         if random.random() < 0.04: 
             self.target_angle = random.uniform(0,2*math.pi)
 
-    
+        x = self.pos[0]
+        y = self.pos[1]
