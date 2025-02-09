@@ -12,10 +12,5 @@ def to_screen_coords(point):
     y = (SCREEN_SIZE[1] // 2) - point[1]
     return np.array([x,y])
     
-
-def lerp(A, B, t):
-    return ((1 - t) * A) - (t * B)
-
-
 def cubic_bezier(points, t): 
     return (1 - t)**3 * points[0].get_pos() + 3 * (1 - t)**2 * t * points[1].get_pos() + 3*(1 - t) * (t**2) * points[2].get_pos() + (t**3) * points[3].get_pos()

@@ -1,6 +1,6 @@
 import pygame
 import sys
-from globals import SCREEN_SIZE, to_math_coords, to_screen_coords, lerp, cubic_bezier
+from globals import SCREEN_SIZE, to_math_coords, to_screen_coords, cubic_bezier
 from point import Point
 import numpy as np 
 class Canvas: 
