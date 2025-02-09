@@ -71,9 +71,10 @@ class Canvas:
         for p in self.points: 
             p.draw(self.screen)
 
-        for p in self.trace: 
-            pygame.draw.circle(self.screen, (0,255,25), p, 1,0)
-
+        # for p in self.trace: 
+            # pygame.draw.circle(self.screen, (0,255,25), p, 1,0)
+        for i in range(0, len(self.trace) - 1): 
+            pygame.draw.line(self.screen,(0,255,0),self.trace[i],self.trace[i + 1],1)
 
         pygame.display.flip()
         self.clock.tick(self.fps)
