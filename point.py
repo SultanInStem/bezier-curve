@@ -1,10 +1,15 @@
 import pygame
 from globals import to_screen_coords
+import math
+import random
 class Point: 
     def __init__(self, pos, radius, color): 
         self.pos = pos 
         self.radius = radius 
         self.color = color
+        self.speed = 2
+        self.angle = random.uniform(0, 2 * math.pi)
+        self.target_angle = self.angle
 
 
     def draw(self, screen): 
@@ -19,5 +24,9 @@ class Point:
 
     def set_pos(self, pos): 
         self.pos = pos 
+
+    def update(self): 
+        if random.random() < 0.04: 
+            self.target_angle = random.uniform(0,2*math.pi)
 
     

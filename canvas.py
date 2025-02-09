@@ -51,6 +51,8 @@ class Canvas:
 
     def update(self):
 
+        for p in self.points: 
+            p.update()
         self.trace = []
         for _ in range(0,int(1 / self.dt)): 
             self.t += self.dt
