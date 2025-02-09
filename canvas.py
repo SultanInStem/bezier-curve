@@ -1,6 +1,6 @@
 import pygame
 import sys
-from globals import SCREEN_SIZE, to_math_coords, to_screen_coords, lerp
+from globals import SCREEN_SIZE, to_math_coords, to_screen_coords, lerp, cubic_bezier
 from point import Point
 import numpy as np 
 class Canvas: 
@@ -16,12 +16,11 @@ class Canvas:
         self.t = 0
         self.dt = 0.01
         self.points = [
-            Point(np.array([-100,0]),  20, (255,255,255)), 
+            Point(np.array([-100,0]),  10, (255,255,255)), 
             Point(np.array([-220,100]), 5, (0,100,100)), 
-            # Point(np.array([50,100]), 5, (0,100,100)), 
-            Point(np.array([100,100]), 20, (255,255,255))
+            Point(np.array([50,100]), 5, (0,100,100)), 
+            Point(np.array([100,100]), 10, (255,255,255))
         ]
-
         self.trace = []
 
     def handle_events(self): 
@@ -51,28 +50,21 @@ class Canvas:
             
 
     def update(self):
-        if self.t >= 1:
-            self.trace = []
-            self.t = 0
-            return
-        self.t += self.dt 
 
-        q1 = lerp(self.points[0].get_pos(), self.points[1].get_pos(), self.t)
-        q2 = lerp(self.points[1].get_pos(), self.points[2].get_pos(), self.t)
-
-        pos = lerp(q1,q2,self.t) 
-        pos = to_screen_coords(pos)
-        self.trace.append((pos[0], pos[1]))
+        self.trace = []
+        for _ in range(0,int(1 / self.dt)): 
+            self.t += self.dt
+            pos = cubic_bezier(self.points, self.t)
+            pos = to_screen_coords(pos)
+            self.trace.append((pos[0], pos[1]))
+        self.t = 0
 
     def render(self): 
         self.screen.fill((0,0,0))
 
-
         for p in self.points: 
             p.draw(self.screen)
 
-        # for p in self.trace: 
-            # pygame.draw.circle(self.screen, (0,255,25), p, 1,0)
         for i in range(0, len(self.trace) - 1): 
             pygame.draw.line(self.screen,(0,255,0),self.trace[i],self.trace[i + 1],1)
 
