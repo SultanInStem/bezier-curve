@@ -1,6 +1,6 @@
 import pygame
 import sys
-from globals import SCREEN_SIZE, to_math_coords
+from globals import SCREEN_SIZE, to_math_coords, to_screen_coords
 from point import Point
 import numpy as np 
 class Canvas: 
@@ -13,13 +13,16 @@ class Canvas:
         self.dragging = False
         self.dragging_index = 0
         self.fps = 90
-
+        self.t = 0
+        self.dt = 0.01
         self.points = [
             Point(np.array([-100,0]),  20, (255,255,255)), 
             Point(np.array([0,100]), 5, (0,100,100)), 
-            Point(np.array([50,100]), 5, (0,100,100)), 
+            # Point(np.array([50,100]), 5, (0,100,100)), 
             Point(np.array([100,100]), 20, (255,255,255))
         ]
+
+        self.trace = []
 
     def handle_events(self): 
         for event in pygame.event.get(): 
@@ -47,7 +50,12 @@ class Canvas:
             
 
     def update(self):
-        pass
+        if self.t >= 1: return
+        self.t += self.dt 
+        pos = (self.points[2].get_pos() - self.points[1].get_pos()) - (self.points[1].get_pos() - self.points[0].get_pos())
+        pos = pos * (self.t) * (self.t)
+        pos = to_screen_coords(pos)
+        self.trace.append((pos[0], pos[1]))
 
     def render(self): 
         self.screen.fill((0,0,0))
@@ -55,6 +63,9 @@ class Canvas:
 
         for p in self.points: 
             p.draw(self.screen)
+
+        for p in self.trace: 
+            pygame.draw.circle(self.screen, (0,255,25), p, 1,0)
 
 
         pygame.display.flip()
