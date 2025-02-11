@@ -5,9 +5,15 @@ Bézier curves are parametric curves widely used in computer graphics, animation
 
 ## Demo 
 
-## How to run 
+## How to run (MacOs)
 ``` bash 
 git clone https://github.com/SultanInStem/bezier-curve.git
+```
+``` bash
+source env/bin/activate 
+```
+``` bash
+
 ```
 
 
