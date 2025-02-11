@@ -13,7 +13,7 @@ git clone https://github.com/SultanInStem/bezier-curve.git
 source env/bin/activate 
 ```
 ``` bash
-
+python3 main.py
 ```
 
 
