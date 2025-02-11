@@ -6,6 +6,10 @@ Bézier curves are parametric curves widely used in computer graphics, animation
 ## Demo 
 
 ## How to run 
+``` bash 
+git clone https://github.com/SultanInStem/bezier-curve.git
+```
+
 
 
 ## References 
